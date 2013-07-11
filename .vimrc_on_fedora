@@ -98,6 +98,7 @@ nnoremap gA :Ack! <cword><CR>
 map <F2> :NERDTreeToggle<CR>
 " Shortcut key Maxxx
 map <C-s> :w<CR>
+nmap ss :w<CR>
 map <C-w>c :q<CR>
 
 map <C-h> <C-w>h
