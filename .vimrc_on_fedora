@@ -19,11 +19,12 @@ filetype off                   " required!
  Bundle 'tpope/vim-rails.git'
  Bundle 'mileszs/ack.vim'
  Bundle 'sjl/gundo.vim.git'
+ Bundle 'kien/ctrlp.vim'
  " vim-scripts repos
  Bundle 'L9'
  Bundle 'FuzzyFinder'
  " non github repos
- Bundle 'git://git.wincent.com/command-t.git'
+ "Bundle 'git://git.wincent.com/command-t.git'
 
 filetype plugin indent on     " required!
 
@@ -105,8 +106,8 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 let mapleader = ","
-nnoremap <Leader><Space> :CommandT<CR>
-nnoremap <silent> <F4> :CommandTFlush<CR>
+nnoremap <Leader><Space> :CtrlP<CR>
+nnoremap <silent> <F4> :CtrlPClearCache<CR>
 " format all file
 nmap <leader>fef gg=G<C-O><C-O>      
 
