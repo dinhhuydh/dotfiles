@@ -4,67 +4,75 @@ set nocompatible
 " Vundle
 "-----------------------------------------------------------------------------
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
 "
 " original repos on github
-Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'Lokaltog/vim-powerline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-"Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-pathogen'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-rails.git'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-bundler'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-repeat'
-Bundle 'godlygeek/tabular'
-Bundle 'mutewinter/vim-indent-guides'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'leshill/vim-json'
-Bundle 'kana/vim-textobj-user'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-Bundle 'vim-scripts/ZoomWin'
-Bundle 'vim-scripts/matchit.zip'
-Bundle 'vim-scripts/greplace.vim'
-Bundle 'vim-scripts/globalreplace.vim'
-Bundle 'itspriddle/vim-jquery'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'snipmate-snippets'
-Bundle 'garbas/vim-snipmate'
-Bundle 'kien/ctrlp.vim'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'rking/ag.vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'vim-ruby/vim-ruby'
-"Bundle 'wincent/Command-T'
-"Bundle 'tienle/vim-itermux'
-Bundle 'jgdavey/vim-turbux'
-Bundle 'jgdavey/tslime.vim'
-Bundle 'ervandew/supertab'
-Bundle 'sjl/gundo.vim'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-cucumber'
-Bundle 'christoomey/vim-tmux-navigator'
+Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'Lokaltog/vim-powerline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+"Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-pathogen'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-rails.git'
+Plugin 'tpope/vim-haml'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-repeat'
+Plugin 'godlygeek/tabular'
+"Plugin 'mutewinter/vim-indent-guides'
+Plugin 'pangloss/vim-javascript'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'leshill/vim-json'
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'vim-scripts/ZoomWin'
+Plugin 'vim-scripts/matchit.zip'
+Plugin 'vim-scripts/greplace.vim'
+Plugin 'vim-scripts/globalreplace.vim'
+Plugin 'itspriddle/vim-jquery'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'snipmate-snippets'
+"Plugin 'kien/ctrlp.vim'
+Plugin 'wincent/command-t'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'rking/ag.vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'vim-ruby/vim-ruby'
+"Plugin 'tienle/vim-itermux'
+Plugin 'jgdavey/vim-turbux'
+Plugin 'jgdavey/tslime.vim'
+Plugin 'ervandew/supertab'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-cucumber'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-dispatch'
+Plugin 'ecomba/vim-ruby-refactoring'
 
 " vim-scripts repos
-Bundle 'L9'
-Bundle 'vis'
-Bundle 'bocau'
-Bundle 'YankRing.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Rainbow-Parenthesis'
-Bundle 'groenewege/vim-less'
-"Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'L9'
+Plugin 'vis'
+Plugin 'bocau'
+Plugin 'YankRing.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Rainbow-Parenthesis'
+Plugin 'groenewege/vim-less'
+"Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'gregsexton/gitv'
+"Plugin 'mileszs/ack.vim'
+Plugin 'ConradIrwin/vim-bracketed-paste'
+
+call vundle#end()            " required
+
 
 "-----------------------------------------------------------------------------
 " General
@@ -79,6 +87,7 @@ set autoread                          " reload file
 set tabpagemax=50                     " open 50 tabs max
 set splitbelow
 set splitright
+set complete-=i
 if version>=730
   set undodir=~/.vim/.tmp,~/tmp,~/.tmp,/tmp
   set undofile
@@ -255,6 +264,16 @@ nmap <leader>x :ccl<CR>
 nmap <leader>w :w<CR>
 
 nmap <CR> :write<CR>
+nmap S :%s//g<LEFT><LEFT>
+vmap S :s//g<LEFT><LEFT>
+" Visual Block mode is far more useful that Visual mode (so swap the commands)...
+" nnoremap v <C-V>
+" nnoremap <C-V> v
+" vnoremap v <C-V>
+" vnoremap <C-V> v
+vmap aa VGo1G
+nnoremap <Space> <PageDown>
+set virtualedit=block
 
 if has("gui_macvim") && has("gui_running")
   map <D-J> :m +1 <CR>
@@ -329,6 +348,8 @@ imap <C-Space> <C-P>
 cnoremap <C-F> <C-R>=expand('%:p:h')<CR>
 
 nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
+
+"let g:ackprg = 'ag --nogroup --nocolor --column'
 nnoremap gA :Ag! <cword><CR>
 
 let g:ctrlp_map = '<Leader><Space>'
@@ -336,6 +357,12 @@ let g:ctrlp_map = '<Leader><Space>'
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 let MRU_Max_Entries = 400
+
+map <Leader><space> :FZF<CR>
+
+let g:ctrlp_max_files=15000
+let g:ctrlp_max_depth=40
+let g:ctrlp_follow_symlinks=1
 
 nnoremap <silent> <F4> <Esc>:ClearCtrlPCache<CR>
 nnoremap <silent> <F3> :TlistToggle<CR>
@@ -350,8 +377,8 @@ nnoremap <leader>ev :CtrlP app/views<cr>
 
 nnoremap <F5> :GundoToggle<CR>
 
-nnoremap <Space> za
-vnoremap <Space> za
+"nnoremap <Space> za
+"vnoremap <Space> za
 
 " Skip to Model, View or Controller
 map <Leader>rm :Rmodel
@@ -364,15 +391,14 @@ map <Leader>c<space> <plug>NERDCommenterToggle
 " Duplicate a selection in Visual mode: D
 vmap D y'>p
 
-set wildignore+=*.o,*.obj,.git
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/public/system/*
+set wildignore+=*.o,*.obj,.git,.pdf,tmp/,node_modules/
 
 "clear highlight search
 nnoremap <Esc> :noh<CR><Esc>
 
 "Ctrl + S to save
 map <C-s> :w<CR>
-nmap ss :w<CR>
+map ss :w<CR>
 imap <C-s> <Esc>:w<CR>
 
 " Toogle buffer zoom
@@ -393,9 +419,9 @@ nnoremap <S-Right> :exe "vertical resize " . (winwidth(0) * 11/10)<CR>
 "autotest
 "nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
 
-"zeus rspec test
-map <Leader>z :call RunTestInZeus(expand('%'))<CR>
-map <Leader>Z :call RunTestInZeus(expand('%'). ':' . line('.'))<CR>
+"Dispatch rspec test
+map <Leader>d :call RunTestInDispatch(expand('%'))<CR>
+map <Leader>D :call RunTestInDispatch(expand('%'). ':' . line('.'))<CR>
 "map <Leader>L :SweetSpecRunLast<CR>
 
 
@@ -426,7 +452,7 @@ let g:rubytest_cmd_test = "ruby %p"
 let g:rubytest_cmd_testcase = "ruby %p -n '/%c/'"
 let g:rubytest_cmd_spec = "spec -f specdoc %p"
 let g:rubytest_cmd_example = "spec -f specdoc %p -e '%c'"
-let g:rubytest_cmd_feature = "cucumber %p"
+let g:rubytest_cmd_feature = "cucumber -r features/ %p"
 let g:rubytest_cmd_story = "cucumber %p -n '%c'"
 "au Filetype ruby call Foldsearch("")
 au Filetype ruby let b:foldsearchprefix='\v^\s*(#.*)?$'
@@ -437,7 +463,7 @@ let Tlist_Show_One_File = 1       " Only show tags for current buffer
 let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
 let tlist_sql_settings = 'sql;P:package;t:table'
 let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
-"let Tlist_Ctags_Cmd = $VIM.'/vimfiles/ctags.exe' " location of ctags tool
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags' " location of ctags tool
 let g:rails_ctags_arguments = "`gem env gemdir`/gems"
 set tags=tags;/
 let g:rails_ctags_arguments = "`gem env gemdir`/gems"
@@ -510,8 +536,8 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-function! RunTestInZeus(test_file)
-  exec "!zeus rspec --no-color " . a:test_file
+function! RunTestInDispatch(test_file)
+  exec "Dispatch zeus rspec " . a:test_file
 endfunction
 
 "  ---------------------------------------------------------------------------
@@ -567,44 +593,60 @@ endfunction
 "  ---------------------------------------------------------------------------
 "  Folding
 "  ---------------------------------------------------------------------------
-set foldmethod=syntax
-set foldnestmax=10
+"set foldmethod=syntax
+"set foldnestmax=10
 set nofoldenable                        "don't fold by default
-set foldlevel=1
-setl foldtext=CustomFoldText()
+"set foldlevel=1
+"setl foldtext=CustomFoldText()
 
-fu! CustomFoldText()
-  "get first non-blank line
-  let fs = v:foldstart
-  while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
-  endwhile
-  if fs > v:foldend
-    let line = getline(v:foldstart)
-  else
-    let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
-  endif
+"fu! CustomFoldText()
+  ""get first non-blank line
+  "let fs = v:foldstart
+  "while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+  "endwhile
+  "if fs > v:foldend
+    "let line = getline(v:foldstart)
+  "else
+    "let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+  "endif
 
-  let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
-  let foldSize = 1 + v:foldend - v:foldstart
-  let foldSizeStr = " " . foldSize . " lines "
-  "let foldLevelStr = repeat("+--", v:foldlevel)
-  let foldLevelStr = ''
-  let lineCount = line("$")
-  let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
-  let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
-  return line . expansionString .  foldSizeStr . foldPercentage .  foldLevelStr
-endf
+  "let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+  "let foldSize = 1 + v:foldend - v:foldstart
+  "let foldSizeStr = " " . foldSize . " lines "
+  ""let foldLevelStr = repeat("+--", v:foldlevel)
+  "let foldLevelStr = ''
+  "let lineCount = line("$")
+  "let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
+  "let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
+  "return line . expansionString .  foldSizeStr . foldPercentage .  foldLevelStr
+"endf
 
 "  ---------------------------------------------------------------------------
 "  Tmux configuration
 "  ---------------------------------------------------------------------------
 let g:turbux_runner            = 'tslime'
-let g:turbux_command_rspec     = 'rspec'
+let g:turbux_command_rspec     = 'zeus rspec'
 let g:turbux_command_test_unit = 'ruby'
-let g:turbux_command_cucumber  = 'cucumber'
-let g:turbux_command_turnip    = 'rspec'
+let g:turbux_command_cucumber  = 'cucumber -r features'
+let g:turbux_command_turnip    = 'zeus rspec'
 
-set cursorline
-set cursorcolumn
+command! Todo Ag! 'TODO|FIXME'
+command! Fixme Ag! 'FIXME'
 
-nmap <leader>c :!ctags -R app/ lib/ `bundle show --paths`<CR>
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+"  ---------------------------------------------------------------------------
+"  YouCompleteMe
+"  ---------------------------------------------------------------------------
+let g:ycm_min_num_of_chars_for_completion = 6
+let g:ycm_auto_trigger = 1
+set rtp+=/usr/local/opt/fzf
+
+" Add this to the bottom of your ~/.vimrc to enable jst highlighting
+au  BufNewFile,BufRead *.jst set syntax=jst
