@@ -536,9 +536,6 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-function! RunTestInDispatch(test_file)
-  exec "Dispatch zeus rspec " . a:test_file
-endfunction
 
 "  ---------------------------------------------------------------------------
 "  Easymotion
@@ -624,11 +621,16 @@ set nofoldenable                        "don't fold by default
 "  ---------------------------------------------------------------------------
 "  Tmux configuration
 "  ---------------------------------------------------------------------------
+let test_command = $DISPATCH_PREFIX." rspec "
+function! RunTestInDispatch(test_file)
+  exec "Dispatch ".test_command. a:test_file
+endfunction
+
 let g:turbux_runner            = 'tslime'
-let g:turbux_command_rspec     = 'zeus rspec'
+let g:turbux_command_rspec     = test_command
 let g:turbux_command_test_unit = 'ruby'
 let g:turbux_command_cucumber  = 'cucumber -r features'
-let g:turbux_command_turnip    = 'zeus rspec'
+let g:turbux_command_turnip    = test_command
 
 command! Todo Ag! 'TODO|FIXME'
 command! Fixme Ag! 'FIXME'
