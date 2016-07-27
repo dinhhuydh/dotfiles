@@ -432,6 +432,7 @@ map <Leader>D :call RunTestInDispatch(expand('%'). ':' . line('.'))<CR>
 au! BufRead,BufNewFile *.haml setfiletype haml
 au! BufRead,BufNewFile *.hamlc setfiletype haml
 au! BufRead,BufNewFile *.rabl setfiletype ruby
+au! BufRead,BufNewFile *.rac setfiletype html
 
 "auto open NERDTree when start
 "autocmd VimEnter * NERDTree
@@ -652,3 +653,5 @@ set rtp+=/usr/local/opt/fzf
 
 " Add this to the bottom of your ~/.vimrc to enable jst highlighting
 au  BufNewFile,BufRead *.jst set syntax=jst
+
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.rac,*.erb"
