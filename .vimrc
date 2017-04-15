@@ -74,6 +74,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'gregsexton/gitv'
 "Plugin 'mileszs/ack.vim'
 Plugin 'ConradIrwin/vim-bracketed-paste'
+Plugin 'junegunn/vim-easy-align'
 Plugin 'mxw/vim-jsx'
 Plugin 'lucapette/vim-ruby-doc.git'
 
@@ -184,6 +185,7 @@ if has('statusline')
   "set statusline+=\ [%{getcwd()}]          " current dir
   "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
   set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+  set statusline+=%{fugitive#statusline()}
 endif
 
 "-----------------------------------------------------------------------------
@@ -662,6 +664,17 @@ set rtp+=/usr/local/opt/fzf
 au  BufNewFile,BufRead *.jst set syntax=jst
 
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.rac,*.erb"
+
+" Easy align configuration
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Copy to system clipboard
+nmap <leader>sc :set clipboard=unnamed<CR>
+nmap <leader>fd :Ag debugger<CR>
+
 " React config
 let g:jsx_ext_required = 0
 
