@@ -75,6 +75,7 @@ Plugin 'gregsexton/gitv'
 "Plugin 'mileszs/ack.vim'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'mxw/vim-jsx'
+Plugin 'lucapette/vim-ruby-doc.git'
 
 call vundle#end()            " required
 
@@ -664,3 +665,5 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.rac,*.erb"
 " React config
 let g:jsx_ext_required = 0
 
+" Ruby doc
+let g:ruby_doc_command='open'
