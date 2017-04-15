@@ -58,6 +58,8 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-dispatch'
 Plugin 'ecomba/vim-ruby-refactoring'
 Plugin 'alvan/vim-closetag'
+" Javascript syntax checking
+" Plugin 'wookiehangover/jshint.vim'
 
 " vim-scripts repos
 Plugin 'L9'
@@ -72,6 +74,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'gregsexton/gitv'
 "Plugin 'mileszs/ack.vim'
 Plugin 'ConradIrwin/vim-bracketed-paste'
+Plugin 'mxw/vim-jsx'
 
 call vundle#end()            " required
 
@@ -435,6 +438,7 @@ au! BufRead,BufNewFile *.haml setfiletype haml
 au! BufRead,BufNewFile *.hamlc setfiletype haml
 au! BufRead,BufNewFile *.rabl setfiletype ruby
 au! BufRead,BufNewFile *.rac setfiletype html
+au! BufRead,BufNewFile *.hbs setfiletype html
 
 "auto open NERDTree when start
 "autocmd VimEnter * NERDTree
@@ -657,3 +661,6 @@ set rtp+=/usr/local/opt/fzf
 au  BufNewFile,BufRead *.jst set syntax=jst
 
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.rac,*.erb"
+" React config
+let g:jsx_ext_required = 0
+
