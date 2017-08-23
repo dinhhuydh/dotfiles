@@ -675,6 +675,11 @@ nmap ga <Plug>(EasyAlign)
 nmap <leader>sc :set clipboard=unnamed<CR>
 nmap <leader>fd :Ag debugger<CR>
 
+" Map to git command
+nmap <leader>gs :Git! show<CR>
+nmap <leader>gl :Git! log -10<CR>
+nmap <leader>gh :!git spelunk %<CR>
+
 " React config
 let g:jsx_ext_required = 0
 
