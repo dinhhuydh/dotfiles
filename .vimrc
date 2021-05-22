@@ -70,13 +70,16 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'Rainbow-Parenthesis'
 Plugin 'groenewege/vim-less'
 "Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'gregsexton/gitv'
 "Plugin 'mileszs/ack.vim'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'mxw/vim-jsx'
 Plugin 'lucapette/vim-ruby-doc.git'
+
+Plugin 'w0rp/ale'
+Plugin 'vim-airline/vim-airline'
 
 call vundle#end()            " required
 
@@ -685,3 +688,11 @@ let g:jsx_ext_required = 0
 
 " Ruby doc
 let g:ruby_doc_command='open'
+
+set clipboard=unnamed
+
+let g:ale_linters = { 'javascript': ['eslint'], 'ruby': ['rubocop'], }
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_column_always = 1
+" Disable ALE auto highlights
+let g:ale_set_highlights = 0
