@@ -21,6 +21,8 @@ Plugin 'tpope/vim-pathogen'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-rails.git'
 Plugin 'tpope/vim-haml'
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'slashmili/alchemist.vim'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-endwise'
@@ -40,12 +42,15 @@ Plugin 'vim-scripts/globalreplace.vim'
 Plugin 'itspriddle/vim-jquery'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
-Plugin 'snipmate-snippets'
+"Plugin 'snipmate-snippets'
 "Plugin 'kien/ctrlp.vim'
 Plugin 'wincent/command-t'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'rking/ag.vim'
+
 Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+
 Plugin 'vim-ruby/vim-ruby'
 "Plugin 'tienle/vim-itermux'
 Plugin 'jgdavey/vim-turbux'
@@ -78,8 +83,11 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'mxw/vim-jsx'
 Plugin 'lucapette/vim-ruby-doc.git'
 
-Plugin 'w0rp/ale'
+Plugin 'dense-analysis/ale'
 Plugin 'vim-airline/vim-airline'
+
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'fatih/vim-go'
 
 call vundle#end()            " required
 
@@ -371,6 +379,7 @@ let MRU_Max_Entries = 400
 
 map <Leader><space> :FZF<CR>
 
+
 let g:ctrlp_max_files=15000
 let g:ctrlp_max_depth=40
 let g:ctrlp_follow_symlinks=1
@@ -445,6 +454,9 @@ au! BufRead,BufNewFile *.hamlc setfiletype haml
 au! BufRead,BufNewFile *.rabl setfiletype ruby
 au! BufRead,BufNewFile *.rac setfiletype html
 au! BufRead,BufNewFile *.hbs setfiletype html
+au BufRead,BufNewFile *.eex,*.heex,*.leex,*.sface,*.lexs set filetype=eelixir
+"au! BufRead,BufNewFile *.heex setfiletype html
+"au! BufRead,BufNewFile *.eex setfiletype html
 
 "auto open NERDTree when start
 "autocmd VimEnter * NERDTree
@@ -666,7 +678,7 @@ set rtp+=/usr/local/opt/fzf
 " Add this to the bottom of your ~/.vimrc to enable jst highlighting
 au  BufNewFile,BufRead *.jst set syntax=jst
 
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.rac,*.erb"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.rac,*.erb,*.heex,*.eex"
 
 " Easy align configuration
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -691,8 +703,18 @@ let g:ruby_doc_command='open'
 
 set clipboard=unnamed
 
-let g:ale_linters = { 'javascript': ['eslint'], 'ruby': ['rubocop'], }
+let g:ale_linters = { 'javascript': ['eslint'], 'ruby': ['rubocop'], 'elixir': ['elixir-ls'] }
+let g:ale_fixers = { 'elixir': ['mix_format'] }
+let g:ale_elixir_elixir_ls_release='/Users/huyd/code/elixir-ls/release/'
 let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_column_always = 1
 " Disable ALE auto highlights
 let g:ale_set_highlights = 0
+
+set statusline+=%{gutentags#statusline()}
+
+" copy current file path to clipboard :let @+=@%
+
+noremap <Leader>ad :ALEGoToDefinition<CR>
+nnoremap <leader>af :ALEFix<cr>
+noremap <Leader>ar :ALEFindReferences<CR>
