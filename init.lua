@@ -782,6 +782,7 @@ vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix
 vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
 vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
 
+-- Send test to tmux pane by key press
 send_file_test_to_tmux = function ()
   local file_path = vim.fn.expand('%:p')
   vim.fn.system(string.format("tmux send-keys -t humanly:1.2 'mix test %s' Enter", file_path))
@@ -794,5 +795,5 @@ send_test_to_tmux = function ()
 end
 
 -- Map a key to the function
-vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>lua send_file_test_to_tmux()<cr>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>lua send_file_test_to_tmux()<cr>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>T', '<cmd>lua send_test_to_tmux()<cr>', {noremap = true, silent = true})
