@@ -335,6 +335,15 @@ require('lazy').setup({
       }
       require("nvim-tree").setup {}
     end,
+  },
+  {
+   "folke/trouble.nvim",
+   dependencies = { "nvim-tree/nvim-web-devicons" },
+   opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+   },
   }
 }, {})
 
@@ -765,3 +774,25 @@ require('nvim-tree').setup({
   },
 })
 vim.api.nvim_set_keymap('n', '<leader>nt', ':NvimTreeToggle<CR>', {noremap = true})
+
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+
+send_file_test_to_tmux = function ()
+  local file_path = vim.fn.expand('%:p')
+  vim.fn.system(string.format("tmux send-keys -t humanly:1.2 'mix test %s' Enter", file_path))
+end
+
+send_test_to_tmux = function ()
+  local file_path = vim.fn.expand('%:p')
+  local line_number = vim.fn.line('.')
+  vim.fn.system(string.format("tmux send-keys -t humanly:1.2 'mix test %s:%d' Enter", file_path, line_number))
+end
+
+-- Map a key to the function
+vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>lua send_file_test_to_tmux()<cr>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>T', '<cmd>lua send_test_to_tmux()<cr>', {noremap = true, silent = true})
