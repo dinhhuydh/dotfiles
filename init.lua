@@ -74,7 +74,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Theme
-  'shaunsingh/solarized.nvim',
+  -- 'shaunsingh/solarized.nvim',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -108,8 +108,8 @@ require('lazy').setup({
     local elixirls = require("elixir.elixirls")
 
     elixir.setup {
-      nextls = {enable = true},
-      credo = {},
+      nextls = {enable = false},
+      credo = {enable = false},
       elixirls = {
         enable = true,
         settings = elixirls.settings {
@@ -223,14 +223,14 @@ require('lazy').setup({
     },
   },
 
-  --{
-    ---- Theme inspired by Atom
-    --'navarasu/onedark.nvim',
-    --priority = 1000,
-    --config = function()
-      --vim.cmd.colorscheme 'onedark'
-    --end,
-  --},
+  {
+    -- Theme inspired by Atom
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'onedark'
+    end,
+  },
 
   {
     -- Set lualine as statusline
@@ -319,6 +319,23 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      vim.g.nvim_tree_show_icons = {
+        git = 0,
+        folders = 0,
+        files = 0,
+        folder_arrows = 0,
+      }
+      require("nvim-tree").setup {}
+    end,
+  }
 }, {})
 
 -- [[ Setting options ]]
@@ -462,6 +479,7 @@ vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]e
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
@@ -710,15 +728,40 @@ cmp.setup {
 }
 
 vim.api.nvim_set_keymap('n', 'ss', ':w<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {noremap = true})
 
-vim.g.solarized_italic_comments = true
-vim.g.solarized_italic_keywords = true
-vim.g.solarized_italic_functions = true
-vim.g.solarized_italic_variables = false
-vim.g.solarized_contrast = true
-vim.g.solarized_borders = false
-vim.g.solarized_disable_background = false
-require('solarized').set()
+--vim.g.solarized_italic_comments = true
+--vim.g.solarized_italic_keywords = true
+--vim.g.solarized_italic_functions = true
+--vim.g.solarized_italic_variables = false
+--vim.g.solarized_contrast = true
+--vim.g.solarized_borders = false
+----vim.g.solarized_disable_background = false
+----require('solarized').set()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- NvimTree
+vim.g.nvim_tree_show_icons = {
+  git = 0,
+  folders = 0,
+  files = 0,
+  folder_arrows = 0,
+}
+
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+require('nvim-tree').setup({
+  filters = {
+    custom = { ".git" }
+  },
+})
+vim.api.nvim_set_keymap('n', '<leader>nt', ':NvimTreeToggle<CR>', {noremap = true})
