@@ -344,6 +344,9 @@ require('lazy').setup({
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
    },
+  },
+  {
+    "dense-analysis/ale"
   }
 }, {})
 
@@ -797,3 +800,20 @@ end
 -- Map a key to the function
 vim.api.nvim_set_keymap('n', '<leader>tt', '<cmd>lua send_file_test_to_tmux()<cr>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>T', '<cmd>lua send_test_to_tmux()<cr>', {noremap = true, silent = true})
+
+
+vim.opt.wrap = false
+
+-- Enable ALE
+vim.g.ale_enabled = 1
+
+-- Set ALE to fix files on save
+vim.g.ale_fix_on_save = 1
+
+-- Specify the fixers you want to use
+--vim.g.ale_fixers = {['*'] = {'remove_trailing_lines'}}
+--vim.g.ale_fixers['elixir'] = {'mix_format'}
+vim.g.ale_fixers = {['*'] = {'remove_trailing_lines'}, ['elixir'] = {'mix_format'}}
+
+vim.g.ale_elixir_elixir_ls_release='/Users/huyd/code/elixir-ls/release/'
+
