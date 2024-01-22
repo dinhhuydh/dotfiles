@@ -1,0 +1,54 @@
+# ~/.tmuxinator/tiny.yml
+
+name: patient
+root: ~/code/patientpulse
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: rvm use 2.2.4@patientpulse
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t tiny
+
+windows:
+  - editor: vim
+  - server:
+      layout: f9c4,178x41,0,0[178x20,0,0{89x20,0,0,4,88x20,90,0,7},178x20,0,21,6]
+      panes:
+        - rails s -p 3005
+        - rails c
+        -
+  - test:
+      layout: f9c4,178x41,0,0[178x20,0,0{89x20,0,0,4,88x20,90,0,7},178x20,0,21,6]
+      panes:
+        -
+        -
+        -
+  - staging:
+      layout: main-horizontal
+      panes:
+        -
+        -
+  - gems:
+  - production:
+      layout: main-horizontal
+      panes:
+        -
+        -

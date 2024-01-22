@@ -1,0 +1,34 @@
+# ~/.tmuxinator/kiemtailieu.yml
+
+name: kiemtailieu
+root: ~/code/kiemtailieu
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: /usr/local/bin/mysql.server start && elasticsearch --config=/usr/local/opt/elasticsearch/config/elasticsearch.yml && redis-server /usr/local/etc/redis.conf &
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: cd .. && cd ~/code/kiemtailieu
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - editor: vim
+  - server:
+      layout: f9c4,178x41,0,0[178x20,0,0{89x20,0,0,4,88x20,90,0,7},178x20,0,21,6]
+      panes:
+        - rails s -p 3002
+        - rails c
+        -
+  - test:
+  - chef:
+      layout: main-horizontal
+      panes:
+        - cd .. && cd kiemtailieu-chef
+        - cd .. && cd kiemtailieu-chef
